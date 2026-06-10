@@ -1,9 +1,9 @@
 #include "UI/CartographMenuWidget.h"
 
-#include "PanelWidget.h"
+#include "Components/PanelWidget.h"
 
-#include "FGBuildable.h"
-#include "FGBuildingDescriptor.h"
+#include "Buildables/FGBuildable.h"
+#include "Resources/FGBuildingDescriptor.h"
 
 #include "CartographGameInstanceModule.h"
 #include "CartographLayerToggleItemWidget.h"

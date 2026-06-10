@@ -2,9 +2,9 @@
 
 #include "Engine/InheritableComponentHandler.h"
 
-#include "FGBuildable.h"
+#include "Buildables/FGBuildable.h"
 #include "FGBuildableBeam.h"
-#include "FGBuildableWire.h"
+#include "Buildables/FGBuildableWire.h"
 #include "FGSplineBuildableInterface.h"
 
 #include "CartographGameInstanceModule.h"

@@ -3,7 +3,7 @@
 #include "FGRemoteCallObject.h"
 
 #include "CoreMinimal.h"
-#include "BufferWriter.h"
+#include "Serialization/BufferWriter.h"
 
 #include "CartographGameInstanceModule.h"
 
