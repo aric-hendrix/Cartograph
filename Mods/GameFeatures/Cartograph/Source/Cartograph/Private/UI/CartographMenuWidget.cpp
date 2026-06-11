@@ -6,9 +6,9 @@
 #include "Resources/FGBuildingDescriptor.h"
 
 #include "CartographGameInstanceModule.h"
-#include "CartographLayerToggleItemWidget.h"
-#include "CartographMenuCategoryWidget.h"
-#include "CartographMenuLayerItemWidget.h"
+#include "UI/CartographLayerToggleItemWidget.h"
+#include "UI/CartographMenuCategoryWidget.h"
+#include "UI/CartographMenuLayerItemWidget.h"
 
 
 void UCartographMenuWidget::InitializeHeadings(UPanelWidget* Panel)

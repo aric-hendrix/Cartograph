@@ -28,10 +28,13 @@
 #include "Patching/BlueprintHookManager.h"
 #include "Patching/NativeHookManager.h"
 
-#include "CartographCanvasRenderItem.h"
+#include "Util/CartographCanvasRenderItem.h"
 #include "CartographModSubsystem.h"
 #include "CartographRemoteCallObject.h"
 #include "Cartograph_ConfigStruct.h"
+
+#include <sstream>
+#include <string>
 
 
 #define LOCTEXT_NAMESPACE "Cartograph"
@@ -960,7 +963,7 @@ void UCartographGameInstanceModule::RegisterMenuButton() const
 			return static_cast<const UCartographPanelWidgetAccessor*>(PanelWidget)->GetSlotClass();
 		}
 
-		static TArray<UPanelSlot*>& GetPanelSlots(UPanelWidget* PanelWidget) {
+		static TArray<TObjectPtr<UPanelSlot>>& GetPanelSlots(UPanelWidget* PanelWidget) {
 			return static_cast<UCartographPanelWidgetAccessor*>(PanelWidget)->Slots;
 		}
 		UCartographPanelWidgetAccessor() = delete;
@@ -1002,7 +1005,7 @@ void UCartographGameInstanceModule::RegisterMenuButton() const
     CARTO_LOG_ERROR_RETURN_IF_NULL(TextPtr);
     *TextPtr = LOCTEXT("CartographMenuShow", "Show Cartograph Menu");
 
-    TArray<UPanelSlot*>& MutablePanelSlots = UCartographPanelWidgetAccessor::GetPanelSlots(Parent);
+    TArray<TObjectPtr<UPanelSlot>>& MutablePanelSlots = UCartographPanelWidgetAccessor::GetPanelSlots(Parent);
 	MutablePanelSlots.Insert(HBoxPanelSlot, Index);
 
 
@@ -1095,7 +1098,7 @@ void UCartographGameInstanceModule::SaveRuntimeConfig()
 	const UConfigPropertySection* RootSection = ConfigManager->GetConfigurationRootSection(ConfigId);
 
 	{
-		UConfigProperty* const* MainCategoryProperty = RootSection->SectionProperties.Find("MainCategoryToggle");
+		const TObjectPtr<UConfigProperty>* MainCategoryProperty = RootSection->SectionProperties.Find("MainCategoryToggle");
 		CARTO_LOG_ERROR_RETURN_IF_NULL(MainCategoryProperty);
 		auto* MainCategoryStringProperty = Cast<UConfigPropertyString>(*MainCategoryProperty);
 		CARTO_LOG_ERROR_RETURN_IF_NULL(MainCategoryStringProperty);
@@ -1109,7 +1112,7 @@ void UCartographGameInstanceModule::SaveRuntimeConfig()
 		MainCategoryStringProperty->MarkDirty();
 	}
 	{
-        UConfigProperty* const* SubCategoryProperty = RootSection->SectionProperties.Find("SubCategoryToggle");
+        const TObjectPtr<UConfigProperty>* SubCategoryProperty = RootSection->SectionProperties.Find("SubCategoryToggle");
         CARTO_LOG_ERROR_RETURN_IF_NULL(SubCategoryProperty);
         auto* SubCategoryStringProperty = Cast<UConfigPropertyString>(*SubCategoryProperty);
         CARTO_LOG_ERROR_RETURN_IF_NULL(SubCategoryStringProperty);
@@ -1127,7 +1130,7 @@ void UCartographGameInstanceModule::SaveRuntimeConfig()
         SubCategoryStringProperty->MarkDirty();
     }
     {
-        UConfigProperty* const* BuildingProperty = RootSection->SectionProperties.Find("BuildingToggle");
+        const TObjectPtr<UConfigProperty>* BuildingProperty = RootSection->SectionProperties.Find("BuildingToggle");
         CARTO_LOG_ERROR_RETURN_IF_NULL(BuildingProperty);
         auto* BuildingStringProperty = Cast<UConfigPropertyString>(*BuildingProperty);
         CARTO_LOG_ERROR_RETURN_IF_NULL(BuildingStringProperty);

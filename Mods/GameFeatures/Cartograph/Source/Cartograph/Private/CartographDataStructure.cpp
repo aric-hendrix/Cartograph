@@ -8,7 +8,7 @@
 #include "FGSplineBuildableInterface.h"
 
 #include "CartographGameInstanceModule.h"
-#include "QuantizedVector2DSerialization.h"
+#include "Util/QuantizedVector2DSerialization.h"
 
 
 // This is used for actual equality check while removing

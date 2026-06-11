@@ -62,11 +62,15 @@ public class Cartograph : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] {"FactoryGame", "SML"});
 		
 		PublicIncludePaths.AddRange(new string[] {
-			// ... add public include paths required here ...
+			// Vendored UE5Coro lives under Public/UE5Coro/UE5Coro/, included as "UE5Coro/...".
+			// UE 5.6 no longer auto-adds Public subdirectories to the include search path.
+			Path.Combine(ModuleDirectory, "Public", "UE5Coro"),
 		});
-		
+
 		PrivateIncludePaths.AddRange(new string[] {
-			// ... add private include paths required here ...
+			Path.Combine(ModuleDirectory, "Private", "UE5Coro"),
+			// UE5Coro private sources include its own headers without the UE5Coro/ prefix
+			Path.Combine(ModuleDirectory, "Public", "UE5Coro", "UE5Coro"),
 		});
 		
 		PublicDependencyModuleNames.AddRange(new string[] {
